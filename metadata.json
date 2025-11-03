@@ -1,0 +1,5 @@
+{
+  "name": "Système de Commande Discord",
+  "description": "Une application web simple qui permet aux utilisateurs de sélectionner des articles, de remplir un formulaire de commande et d'envoyer les détails de la commande à un webhook Discord.",
+  "requestFramePermissions": []
+}
