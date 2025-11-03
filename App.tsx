@@ -1,17 +1,9 @@
-// ============================================
-// IMPORTS
-// ============================================
 import React, { useState, useCallback, useMemo } from 'react';
 import FoodItemCard from './components/FoodItemCard';
 import { sendOrderToDiscord } from './services/discordService';
 import type { FoodItem, CartItem, OrderDetails } from './types';
 import { PaymentMethod } from './types';
 
-// ============================================
-// CONSTANTS & TYPES
-// ============================================
-
-// Configuration des articles disponibles
 const FOOD_ITEMS: FoodItem[] = [
   { id: 1, name: 'Test 1', price: 1.50, imageUrl: '' },
   { id: 2, name: 'Test 2', price: 2.50, imageUrl: '' },
@@ -23,18 +15,10 @@ const FOOD_ITEMS: FoodItem[] = [
   { id: 8, name: 'Test 8', price: 8.50, imageUrl: '' }
 ];
 
-const TAX_RATE = 0.1; // Taux de TVA à 10%
+const TAX_RATE = 0.1; // 10%
 
-// Types pour la navigation entre les pages
 type Page = 'products' | 'cart' | 'checkout' | 'success';
 
-// ============================================
-// COMPOSANTS D'INTERFACE
-// ============================================
-
-/**
- * En-tête de l'application avec navigation
- */
 const Header: React.FC<{ page: Page; onNavigate: (page: Page) => void; cartCount: number }> = ({ page, onNavigate, cartCount }) => {
   const titles: Record<Page, string> = {
     products: 'Nos produits',
@@ -65,9 +49,6 @@ const Header: React.FC<{ page: Page; onNavigate: (page: Page) => void; cartCount
   );
 };
 
-/**
- * Page d'affichage des produits
- */
 const ProductListPage: React.FC<{ 
   onAddToCart: (item: FoodItem) => void; 
   onNavigate: (page: Page) => void; 
@@ -93,9 +74,6 @@ const ProductListPage: React.FC<{
     </div>
 );
 
-/**
- * Page du panier
- */
 const CartPage: React.FC<{ 
   cart: CartItem[], 
   onUpdateQuantity: (id: number, quantity: number) => void, 
@@ -145,9 +123,6 @@ const CartPage: React.FC<{
     );
 };
 
-/**
- * Page de paiement
- */
 const CheckoutPage: React.FC<{ 
   cart: CartItem[], 
   onSubmit: (details: OrderDetails) => Promise<void> 
@@ -251,9 +226,6 @@ const CheckoutPage: React.FC<{
     );
 };
 
-/**
- * Page de confirmation de commande
- */
 const SuccessPage: React.FC<{ 
   onNavigate: (page: Page) => void 
 }> = ({ onNavigate }) => (
@@ -265,9 +237,6 @@ const SuccessPage: React.FC<{
     </div>
 );
 
-// ============================================
-// COMPOSANT PRINCIPAL
-// ============================================
 const App: React.FC = () => {
   const [page, setPage] = useState<Page>('products');
   const [cart, setCart] = useState<CartItem[]>([]);
