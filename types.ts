@@ -15,8 +15,7 @@ export enum PaymentMethod {
 }
 
 export interface OrderDetails {
-  firstName: string;
-  lastName: string;
+  fullName: string;
   contactInfo: string;
   paymentMethod: PaymentMethod;
 }

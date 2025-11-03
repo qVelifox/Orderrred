@@ -8,23 +8,22 @@ export const sendOrderToDiscord = async (orderDetails: OrderDetails, items: Cart
   const description = items.map(item => `${item.quantity}x ${item.name}`).join('\n');
 
   const payload = {
-    username: "Bot de Commandes",
-    avatar_url: "C:\Users\velif\Desktop\système-de-commande-discord\imgs\Orderrred Logo White Bg.png",
+    username: "Orderrred Bot",
+    avatar_url: "https://github.com/qVelifox/Orderrred/blob/main/imgs/Orderrred%20Logo%20White%20Bg.png?raw=true",
     embeds: [
       {
-        title: `Nouvelle Commande!`,
+        title: `New Order!`,
         color: 0xF97316, // Orange
         description: description,
         fields: [
-          { name: 'Prénom', value: orderDetails.firstName, inline: true },
-          { name: 'Nom', value: orderDetails.lastName, inline: true },
-          { name: 'Contact', value: `\`${orderDetails.contactInfo}\``, inline: false },
-          { name: 'Paiement', value: orderDetails.paymentMethod, inline: true },
+          { name: 'Full Name', value: orderDetails.fullName, inline: true },
+          { name: 'Contact', value: `\`${orderDetails.contactInfo}\``, inline: true },
+          { name: 'Payment', value: orderDetails.paymentMethod, inline: true },
           { name: 'Total', value: `**${total.toFixed(2)}€**`, inline: true },
         ],
         timestamp: new Date().toISOString(),
         footer: {
-          text: `Nouvelle commande`,
+          text: `New Order`,
         },
       },
     ],
@@ -40,6 +39,6 @@ export const sendOrderToDiscord = async (orderDetails: OrderDetails, items: Cart
 
   if (!response.ok) {
     console.error('Failed to send message to Discord:', response.statusText);
-    throw new Error('Échec de l\'envoi de la notification Discord.');
+    throw new Error('Failed to send notification to Discord.');
   }
 };
